@@ -404,6 +404,12 @@ Create a file in your `_includes` folder called `skynetPlayer.html` with this co
 {% endif %}
 ```
 
+Place this snippet inside your .md file where you want to embed your video:
+
+```
+{% include skynetPlayer.html id=page.skynetId %}
+```
+
 On the top of your .md file, put the Skynet ID.
 
 ```
