@@ -14,6 +14,7 @@ http://www.nathan-lam.com/projects/jekyll-embed-video
 * [Embed Streamable](#embed-streamable)
 * [Embed Mixer](#embed-mixer)
 * [Embed Google Drive](#embed-google-drive)
+* [Embed Sia Skynet Link](#embed-skynet)
 * [Additional support for 20Detik, Dailymotion, Metube, Vidio, and LINE Today](#additional-support)
 * [Responsive Videos](#responsive-videos)
 * [Iframe Attributes](#iframe-attributes)
@@ -382,6 +383,32 @@ On the top of your .md file, put the LINE Today video and country ID. You could 
 ---
 linetodayId: abcdefg 
 countryId: hk
+---
+```
+
+# Embed Skynet 
+
+Create a file in your `_includes` folder called `skynetPlayer.html` with this code inside: 
+
+```
+{% if page.skynetId %}
+  <div class="embed-container">
+    <iframe
+        src="https://siasky.net/{{ include.id }}"
+        width="700"
+        height="480"
+        frameborder="0"
+        allowfullscreen="">
+    </iframe>
+  </div>
+{% endif %}
+```
+
+On the top of your .md file, put the Skynet ID.
+
+```
+---
+skynetId: nil 
 ---
 ```
 
