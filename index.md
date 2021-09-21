@@ -37,10 +37,10 @@ Using Google Drive videos is a bit more complicated; [check the README][wiki] fo
 
 [wiki]: https://github.com/nathancy/jekyll-embed-video#embed-google-drive
 
-{%- include video-player.html site="Google Drive" id="0B7L_dMcaZknxVTRndmdSQ0F5OFE/preview" alt="Road Rage" -%}
+{%- include video-embed.html site="Google Drive" id="0B7L_dMcaZknxVTRndmdSQ0F5OFE/preview" alt="Road Rage" -%}
 
 ```liquid
-{% raw %}{%- include video-player.html site="Google Drive" id="0B7L_dMcaZknxVTRndmdSQ0F5OFE/preview" alt="Road Rage" -%}{% endraw %}
+{% raw %}{%- include video-embed.html site="Google Drive" id="0B7L_dMcaZknxVTRndmdSQ0F5OFE/preview" alt="Road Rage" -%}{% endraw %}
 ```
 
 ## Streamable
