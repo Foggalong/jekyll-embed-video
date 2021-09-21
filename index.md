@@ -7,6 +7,18 @@ The embedded video player template works with Dailymotion, Google Drive, Streama
 [Jekyll Embed Video]: https://github.com/nathancy/jekyll-embed-video
 [single template]: https://github.com/Foggalong/jekyll-embed-video/blob/main/_includes/video-embed.html
 
+## 20DETIK
+
+Here video IDs are just the URL number, e.g. [20.detik.com/embed/190130051][detik]
+
+[detik]: https://20.detik.com/embed/190130051
+
+{%- include video-embed.html site="20DETIK" id="190130051" alt="McGregor dan Khabib Resmi Dijatuhi Sanksi!" -%}
+
+```liquid
+{% raw %}{%- include video-embed.html site="20DETIK" id="190130051" alt="McGregor dan Khabib Resmi Dijatuhi Sanksi!" -%}{% endraw %}
+```
+
 ## Dailymotion
 
 Here video IDs are just the URL code, e.g. [dailymotion.com/video/x8429i4][dailymotion]
@@ -25,10 +37,10 @@ Using Google Drive videos is a bit more complicated; [check the README][wiki] fo
 
 [wiki]: https://github.com/nathancy/jekyll-embed-video#embed-google-drive
 
-{%- include video-embed.html site="Google Drive" id="0B7L_dMcaZknxVTRndmdSQ0F5OFE/preview" alt="Road Rage" -%}
+{%- include video-player.html site="Google Drive" id="0B7L_dMcaZknxVTRndmdSQ0F5OFE/preview" alt="Road Rage" -%}
 
 ```liquid
-{% raw %}{%- include video-embed.html site="Dailymotion" id="x8429i4" alt="Road Rage" -%}{% endraw %}
+{% raw %}{%- include video-player.html site="Google Drive" id="0B7L_dMcaZknxVTRndmdSQ0F5OFE/preview" alt="Road Rage" -%}{% endraw %}
 ```
 
 ## Streamable
@@ -53,6 +65,18 @@ For Twitch the video IDs are the long string which appears in the URL, e.g. [cli
 
 ```liquid
 {% raw %}{%- include video-embed.html site="Twitch" id="StylishChillyTubersDancingBaby" alt="LCK Production" -%}{% endraw %}
+```
+
+## Vidio
+
+Here video IDs are just the URL number, e.g. [vidio.com/watch/1671743-love-nature-channel-channel-trailer][vidio].
+
+[vidio]: https://vidio.com/watch/1671743-love-nature-channel-channel-trailer
+
+{% include video-embed.html site="Vidio" id="1671743" alt="Love Nature Channel Trailer" %}
+
+```liquid
+{% raw %}{% include video-embed.html site="Vidio" id="1671743" alt="Love Nature Channel Trailer" %}{% endraw %}
 ```
 
 ## Vimeo
