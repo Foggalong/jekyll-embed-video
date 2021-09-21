@@ -21,7 +21,7 @@ Fork of [this great project](https://github.com/nathancy/jekyll-embed-video) by 
 
 ## Setup
 
-Download [video-embed.html](video-embed.html) and place it in your `_includes` folder. That's it! No plugins, no datafiles.
+Download [video-embed.html](_includes/video-embed.html) and place it in your `_includes` folder. That's it! No plugins, no datafiles.
 
 ## Usage
 
@@ -71,7 +71,7 @@ Use `Streamable` as `SiteName` and the ID in the URL as the `VideoID` (for examp
 
 Use `Twitch` as `SiteName` and the long string which appears in the URL as the `VideoID`. For example, [clips.twitch.tv/StylishChillyTubersDancingBaby](https://clips.twitch.tv/StylishChillyTubersDancingBaby) would be `StylishChillyTubersDancingBaby`.
 
-For security purposes Twitch also asks for the URL on which the website is being embedded, but provided you’ve defined `site.url` as standard in your `_config.yml` then the template will [handle that](video-embed.html#L61-L70). See the [embedding Twitch clips documentation](https://dev.twitch.tv/docs/embed/video-and-clips/#non-interactive-iframes-for-clips) for more details.
+For security purposes Twitch also asks for the URL on which the website is being embedded, but provided you’ve defined `site.url` as standard in your `_config.yml` then the template will [handle that](/_includes/video-embed.html#L61-L70). See the [embedding Twitch clips documentation](https://dev.twitch.tv/docs/embed/video-and-clips/#non-interactive-iframes-for-clips) for more details.
 
 ### Vidio
 
@@ -87,7 +87,7 @@ Use `YouTube` as `SiteName` and `v` value in the URL as the `VideoID` (for examp
 
 ## Responsive Videos
 
-The template includes [this CSS](video-embed.html#L41-L58) to make the videos fully responsive, automatically resizing with changing window sizes. If you'd prefer not to have this or want it included in another stylesheet then simply remove the contents of `<style> ... </style>` from the template.
+The template includes [this CSS](_includes/video-embed.html#L41-L58) to make the videos fully responsive, automatically resizing with changing window sizes. If you'd prefer not to have this or want it included in another stylesheet then simply remove the contents of `<style> ... </style>` from the template.
 
 ## Setting Variables
 
