@@ -4,12 +4,10 @@ youtubeId: putYourIDHere
 vimeoId: putYourIDHere
 twitchId: putYourIDHere
 streamableId: putYourIDHere
-mixerId: putYourIDHere
 driveId: putYourIDHere
 detikId: putYourIDHere
 dailymotionId: putYourIDHere
 vidioId: putYourIDHere
-linetodayId: putYourIDHere
 countryId: putYourIDHere
 ---
 
@@ -92,14 +90,3 @@ Example:     vidioId: 1671743
 -->
 
 {% include vidioPlayer.html id=page.vidioId %}
-
-## Embed LINE Today
-
-<!---
-Include these next lines in your .md file for LINE Today videos, make sure to put your video and country ID up there!
-
-Example:     linetodayId: abcdefg 
-             countryId: hk
--->
-
-{% include linetodayPlayer.html id=page.linetodayId country=page.countryId %}

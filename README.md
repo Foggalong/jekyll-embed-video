@@ -292,45 +292,6 @@ vidioId: 1671743
 ---
 ```
 
-### Embed LINE Today
-
-LINE Today contents are served in different countries so another `country` parameter (to be filled with a 2-letter country code) is needed. Here's all the supported country codes (case-insensitive)
-
-* `hk` - Hong Kong
-* `id` - Indonesia
-* `th` - Thailand
-* `tw` - Taiwan
-
-Create a file in your `_includes` folder called `linetodayPlayer.html` with this code inside:
-
-```html
-<div class="embed-container">
-  <iframe
-      src="https://today.line.me/{{ include.country }}/embed/{{ include.id }}"
-      width="700"
-      height="480"
-      frameborder="0"
-      allowfullscreen=""
-      allow="autoplay; encrypted-media">
-  </iframe>
-</div>
-```
-
-Place this snippet inside your .md file where you want to embed your video:
-
-```liquid
-{% include linetodayPlayer.html id=page.linetodayId country=page.countryId %}
-```
-
-On the top of your .md file, put the LINE Today video and country ID. You could also put the IDs directly.
-
-```yaml
----
-linetodayId: abcdefg 
-countryId: hk
----
-```
-
 ## Responsive Videos
 
 For responsive videos that automatically resize with changing window sizes, add in `video-embed.css`.
@@ -377,12 +338,10 @@ youtubeId: putYourIDHere
 vimeoId: putYourIDHere
 twitchId: putYourIDHere
 streamableId: putYourIDHere
-mixerId: putYourIDHere
 driveId: putYourIDHere
 detikId: putYourIDHere
 dailymotionId: putYourIDHere
 vidioId: putYourIDHere
-linetodayId: putYourIDHere
 countryId: putYourIDHere
 ---
 
@@ -466,15 +425,4 @@ Example:     vidioId: 1671743
 -->
 
 {% include vidioPlayer.html id=page.vidioId %}
-
-## Embed LINE Today
-
-<!---
-Include these next lines in your .md file for LINE Today videos, make sure to put your video and country ID up there!
-
-Example:     linetodayId: abcdefg 
-             countryId: hk
--->
-
-{% include linetodayPlayer.html id=page.linetodayId country=page.countryId %}
 ```
