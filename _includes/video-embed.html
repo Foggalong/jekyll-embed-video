@@ -32,7 +32,7 @@
 {%- assign autoplay   = include.autoplay   | default: false -%}
 {%- assign fullscreen = include.fullscreen | default: true -%}
 {% comment %} Input from Jekyll config {% endcomment %}
-{%- assign embed.url = site.url | default: "127.0.0.1" -%}
+{%- assign embed_url = site.url | default: "127.0.0.1" -%}
 {% comment %} Required inputs {% endcomment %}
 {%- assign source = include.site -%}
 {%- assign id     = include.id -%}
@@ -64,10 +64,17 @@
   keep working seamlessly between local and prod builds.
 {% endcomment %}
 {%- if jekyll.environment == "production" -%}
-  {%- assign host = embed.url -%}
+  {%- assign host = embed_url -%}
 {%- else -%}
   {%- assign host = "127.0.0.1" -%}
 {% endif -%}
+
+
+<!-- TWITCH DEBUGGING -->
+{{ site.url }}
+{{ embed_url }}
+{{jekyll.environment}}
+{{host}}
 
 
 {% comment %}
