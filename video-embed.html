@@ -1,0 +1,109 @@
+{% comment %}
+  jekyll-embedded-video · Nathan Lam, Josh Fogg · 2017-2021
+
+  Embedded video player for Jekyll which works which a whole host
+  of different websites without a plugin. It takes the following
+  two required parameters
+
+    site: the service hosting the original video
+      id: that service's ID for the original video
+
+  and any combination of the following optional parameters
+
+           alt: video title to use as title and alt text
+      autoplay: bool, whether video starts playing automatically
+    fullscreen: bool, whether player is allowed to go full screen
+         width: width of the embedded window, in pixels
+        height: height of the embedded window, in pixels
+
+  and then returns a responsive iframe to embed that video in a
+  page. See the README for more explanation and example usage.
+{% endcomment %}
+
+
+{% comment %}
+  Set aliases and defaults for input variables. Defaults can be
+  changed here as desired.
+{% endcomment %}
+
+{% comment %} Optional inputs {% endcomment %}
+{%- assign width      = include.width      | default: "500px" -%}
+{%- assign height     = include.height     | default: "281px" -%}
+{%- assign autoplay   = include.autoplay   | default: false -%}
+{%- assign fullscreen = include.fullscreen | default: true -%}
+{% comment %} Input from Jekyll config {% endcomment %}
+{%- assign embed.url = site.url | default: "127.0.0.1" -%}
+{% comment %} Required inputs {% endcomment %}
+{%- assign source = include.site -%}
+{%- assign id     = include.id -%}
+
+
+{% comment %}
+  Some sites also ask for the site doing the embedding for
+  security purposes, so this quick check makes sure things
+  keep working seamlessly between local and prod builds.
+{% endcomment %}
+{%- if jekyll.environment == "production" -%}
+  {%- assign host = embed.url -%}
+{%- else -%}
+  {%- assign host = "127.0.0.1" -%}
+{% endif -%}
+
+
+{% comment %}
+  Setup data variables for the relevant source website. This
+  could be done smarter using datafiles but that defeats the
+  point of making this a plugin-less tool.
+{% endcomment %}
+{%- if source == "20DETIK" -%}
+  {%- assign url = "20.detik.com/embed/" -%}
+
+{%- elsif source == "Dailymotion" -%}
+  {%- assign url = "dailymotion.com/embed/video/" -%}
+
+{%- elsif source == "Google Drive" -%}
+  {%- assign url = "drive.google.com/file/d/" -%}
+
+{%- elsif source == "Streamable" -%}
+  {%- assign url = "streamable.com/s/" -%}
+
+{%- elsif source == "Twitch" -%}
+  {%- assign url = "clips.twitch.tv/embed?clip=" -%}
+  {%- assign id = id | append: "&parent=" | append: host -%}
+
+{%- elsif source == "Vidio" -%}
+  {%- assign url = "www.vidio.com/embed/" -%}
+
+{%- elsif source == "Vimeo" -%}
+  {%- assign url = "player.vimeo.com/video/" -%}
+
+{%- elsif source == "YouTube" -%}
+  {%- assign url = "youtube.com/embed/" -%}
+
+{%- endif -%}
+
+
+{% comment %} Actual iframe and container {% endcomment %}
+<div class="embed-container">
+  <iframe
+    class  = "video-embed"
+    alt    = "{{ include.alt }}"
+    title  = "{{ include.alt }}"
+    src    = "{{ url | append: id | prepend: 'https://' }}"
+    width  = {{ width }}
+    height = {{ height }}
+    frameborder = "0"
+    scrolling = "no"
+    {% if autoplay == true -%}
+      allow = "autoplay"
+      autoplay = true
+    {% else -%}
+      autoplay = false
+    {%- endif -%}
+    {% if fullscreen == true -%}
+      webkitallowfullscreen
+      mozallowfullscreen
+      allowfullscreen
+    {%- endif -%}>
+  </iframe>
+</div>
