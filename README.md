@@ -2,7 +2,7 @@
 
 Embed YouTube, Vimeo, Twitch, Streamable, Google Drive videos/clips and more in Jekyll webpages without a plugin. If you are hosting your webpage using GitHub pages, you can't use third party plugins. Here is a method to use "includes" instead of plugins.
 
-See the raw text in `example.md` for a complete example. Remember to add in [video-embed.css](https://github.com/nathancy/jekyll-embed-video/blob/master/video-embed.css) for [responsive videos](#responsive-videos) that automatically resize with changing window dimensions.
+See the raw text in `example.md` for a complete example.
 
 ## Demo
 
@@ -294,25 +294,7 @@ vidioId: 1671743
 
 ## Responsive Videos
 
-For responsive videos that automatically resize with changing window sizes, add in `video-embed.css`.
-
-```css
-.embed-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-}
-
-.embed-container iframe, .embed-container object, .embed-container embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-```
+The template includes [this CSS](video-embed.html#L41-L58) to make the videos fully responsive, automatically resizing with changing window sizes. If you'd prefer not to have this or want it included in another stylesheet then simply remove the contents of `<style> ... </style>` from the template.
 
 ## Iframe Attributes
 
