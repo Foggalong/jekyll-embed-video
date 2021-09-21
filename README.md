@@ -33,7 +33,7 @@ To embed video `VideoID` from `SiteName` in a Jekyll webpage, use the snippet
 
 in any markdown file. While technically optional, it's good practice to can replace `Title` with fallback text (usually the video's title) to appear should the `<iframe>` fail.
 
-See below for example usage for each service and how to find the `VideoID` and [checkout this page](http://www.nathan-lam.com/projects/jekyll-embed-video) for a full working demo.
+See below for example usage for each service and how to find the `VideoID` and [checkout this page](https://foggalong.github.io/jekyll-embed-video) for a full working demo.
 
 ### 20DETIK
 

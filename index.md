@@ -2,9 +2,11 @@
 title: Jekyll Embed Video Demo
 ---
 
-The embedded video player template works with Dailymotion, Google Drive, Streamable, Twitch, Vimeo, and YouTube. It's based on [Jekyll Embed Video]'s template collection but combines them into a [single template].
+[Jekyll Embed Video] allows you to easily embed a video into a Jekyll webpage without using plugins. It's based on this [template collection] by [Nathan Lam], but combines them into a [single template] for easier use. This page is **heavy** because it gives an example of the template in use for every service.
 
-[Jekyll Embed Video]: https://github.com/nathancy/jekyll-embed-video
+[Jekyll Embed Video]: https://github.com/Foggalong/jekyll-embed-video
+[template collection]: https://github.com/nathancy/jekyll-embed-video
+[Nathan Lam]: https://www.nathan-lam.com
 [single template]: https://github.com/Foggalong/jekyll-embed-video/blob/main/_includes/video-embed.html
 
 ## 20DETIK
