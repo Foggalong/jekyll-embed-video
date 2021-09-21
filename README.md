@@ -1,410 +1,109 @@
-# jekyll-embed-video
+# Jekyll Embed Video
 
-Embed YouTube, Vimeo, Twitch, Streamable, Google Drive videos/clips and more in Jekyll webpages without a plugin. If you are hosting your webpage using GitHub pages, you can't use third party plugins. Here is a method to use "includes" instead of plugins.
+Embed YouTube, Vimeo, Twitch, and more in Jekyll webpages without a plugin. If you're hosting your webpage using GitHub pages only [whitelisted plugins](https://pages.github.com/versions/) are allowed. Here's a method using a Liquid template stored in `_includes` instead.
 
-See the raw text in `example.md` for a complete example.
-
-## Demo
-
-<http://www.nathan-lam.com/projects/jekyll-embed-video>
+Fork of [this great project](https://github.com/nathancy/jekyll-embed-video) by [Nathan Lam](https://www.nathan-lam.com), rewritten to use a single template rather than one per-service. Original project was released under an unknown license.
 
 ## Table of Contents
 
-* [Embed YouTube](#embed-youtube)
-* [Embed Vimeo](#embed-vimeo)
-* [Embed Twitch](#embed-twitch)
-* [Embed Streamable](#embed-streamable)
-* [Embed Google Drive](#embed-google-drive)
-* [Additional support for 20Detik, Dailymotion, Vidio, and LINE Today](#additional-support)
+* [Setup](#setup)
+* [Usage](#usage)
+  * [20DETIK](#20detik)
+  * [Dailymotion](#dailymotion)
+  * [Google Drive](#google-drive)
+  * [Streamable](#streamable)
+  * [Twitch](#twitch)
+  * [Vidio](#vidio)
+  * [Vimeo](#vimeo)
+  * [YouTube](#youtube)
 * [Responsive Videos](#responsive-videos)
-* [Iframe Attributes](#iframe-attributes)
-* [Full Example](#full-example)
+* [Setting Variables](#setting-variables)
 
-## Embed YouTube
+## Setup
 
-Create a file in your `_includes` folder called `youtubePlayer.html` with this code inside:
+Download [video-embed.html](video-embed.html) and place it in your `_includes` folder. That's it! No plugins, no datafiles.
 
-```html
-<div class="embed-container">
-  <iframe
-      src="https://www.youtube.com/embed/{{ include.id }}"
-      width="700"
-      height="480"
-      frameborder="0"
-      allowfullscreen="">
-  </iframe>
-</div>
-```
+## Usage
 
-Place this snippet inside your .md file where you want to embed your video:
+To embed video `VideoID` from `SiteName` in a Jekyll webpage, use the snippet
 
 ```liquid
-{% include youtubePlayer.html id=page.youtubeId %}
+{% include video-embed.html site="SiteName" id="VideoID" alt="Title" %}
 ```
 
-On the top of your .md file, put the YouTube video ID. You could also put the ID of the video directly.
+in any markdown file. While technically optional, it's good practice to can replace `Title` with fallback text (usually the video's title) to appear should the `<iframe>` fail.
 
-```yaml
----
-youtubeId: putYourIDHere
----
-```
+See below for example usage for each service and how to find the `VideoID` and [checkout this page](http://www.nathan-lam.com/projects/jekyll-embed-video) for a full working demo.
 
-## Embed Vimeo
+### 20DETIK
 
-Create a file in your `_includes` folder called `vimeoPlayer.html` with this code inside:
+Use `20DETIK` as `SiteName` and the number in the embedded video URL as the `VideoID` (for example, [20.detik.com/embed/190130051](https://20.detik.com/embed/190130051) would be `190130051`).
 
-```html
-<div class="embed-container">
-  <iframe
-      src="https://player.vimeo.com/video/{{ include.id }}"
-      width="500"
-      height="281"
-      frameborder="0"
-      webkitallowfullscreen
-      mozallowfullscreen
-      allowfullscreen>
-  </iframe>
-</div>
-```
+### Dailymotion
 
-Place this snippet inside your .md file where you want to embed your video:
+Use `Dailymotion` as `SiteName` and the ID in the video URL as the `VideoID` (for example, [dailymotion.com/video/x8429i4](https://dailymotion.com/video/x8429i4) would be `x8429i4`).
 
-```liquid
-{% include vimeoPlayer.html id=page.vimeoId %}
-```
+### Google Drive
 
-On the top of your .md file, put the Vimeo video ID. You could also put the ID of the video directly. Take a look at [accessing and editing embed codes](https://vimeo.zendesk.com/hc/en-us/articles/360000710167-Accessing-and-editing-embed-codes) to find your video's embed code ID.
+We **strongly recommend** you upload your your video to [YouTube](#youtube) since it has better built in video player functionality. If you do still wish to use Google Drive though here are the steps:
 
-```yaml
----
-vimeoId: putYourIDHere
----
-```
+1. Use `"Google Drive"` as the `SiteName`.
 
-## Embed Twitch
-
-Embedding Twitch clips requires an additional "Domain" parameter. Create a file in your `_includes` folder called `twitchPlayer.html` with this code inside:
-
-```html
-<div class="embed-container">
-  <iframe
-      src="https://clips.twitch.tv/embed?clip={{ include.id }}&parent={{ include.domain }}"
-      height="360"
-      width="640"
-      frameborder="0"
-      scrolling="no"
-      allowfullscreen="true">
-  </iframe>
-</div>
-```
-
-Place this snippet inside your .md file where you want to embed your video:
-
-```liquid
-{% include twitchPlayer.html id=page.twitchId domain=page.twitchDomain %}
-```
-
-On the top of your .md file, put the Twitch video ID and domain name. You could also put the ID of the video directly.
-
-```yaml
----
-twitchId: putYourIDHere
-twitchDomain: putYourDomainHere
----
-```
-
-See the [embedding Twitch clips documentation](https://dev.twitch.tv/docs/embed/video-and-clips/#non-interactive-iframes-for-clips) for more details.
-
-## Embed Streamable
-
-Create a file in your `_includes` folder called `streamablePlayer.html` with this code inside:
-
-```html
-<div class="embed-container">
-  <iframe
-      src="https://streamable.com/s/{{ include.id }}"
-      height="360"
-      width="640"
-      frameborder="0"
-      scrolling="no"
-      allowfullscreen="true">
-  </iframe>
-</div>
-```
-
-Place this snippet inside your .md file where you want to embed your video:
-
-```liquid
-{% include streamablePlayer.html id=page.streamableId %}
-```
-
-On the top of your .md file, put the Streamable video ID. You could also put the ID of the video directly.
-
-```yaml
----
-streamableId: putYourIDHere
----
-```
-
-To find your embed video ID use [Streamable's free online tool](https://streamable.com/embed-video)
-
-## Embed Google Drive
-
-**Recommendation:** Upload your video to [YouTube instead](#embed-youtube) since it has better built in video player functionality.
-
-Embedding Google Drive videos have additional steps.
-
-1. For the desired video, change the link sharing setting to `On - Anyone with the link`. This will make the video accessible to anyone who has the link as no sign-in is required.
+2. For the desired video, change the link sharing setting to '_On - Anyone with the link_'. This will make the video accessible to anyone who has the link as no sign-in is required. **If you do not change the video setting to this option, your video will not show**.
   
-   **Important**: If you do not change the video setting to this option, your video will not show.
-  
-2. Double click the video to show the preview. Click the setting options and select "Open in new window". Now click on the setting option again and select "Embed item". The iframe code should appear. For example:
+3. Now you need to find your ID. In Google Drive, double click the video to show the preview, click the setting options, and select '_Open in new window_'. Now click on the setting option again and select '_Embed item_'. **Right clicking the video will not bring up the embed option.** You must open the video in a new window.
 
-```html
-<iframe src="https://drive.google.com/file/d/1EC8BnjJMon-vqy-UhLKk9sf_oukZzEbP/preview"></iframe>
-```
+4. This should display some `<iframe>` code. If, for example, your code was
 
-`1EC8BnjJMon-vqy-UhLKk9sf_oukZzEbP/preview` would be your video ID.
+   ```html
+   <iframe src="https://drive.google.com/file/d/1EC8BnjJMon-vqy-UhLKk9sf_oukZzEbP/preview"></iframe>
+   ```
 
-**Note**: Right clicking the video will not bring up the embed option. You must open the video in a new window.
+   then your `VideoID` is `1EC8BnjJMon-vqy-UhLKk9sf_oukZzEbP/preview` would be your video ID.
 
-Create a file in your `_includes` folder called `googleDrivePlayer.html` with this code inside:
+Again, would highly recommend just using a unlisted [YouTube](#youtube) video instead.
 
-```html
-<div class="embed-container">
-  <iframe
-      width="640"
-      height="480"
-      src="https://drive.google.com/file/d/{{ include.id }}"
-      frameborder="0"
-      allowfullscreen="">
-  </iframe>
-</div>
-```
+### Streamable
 
-Place this snippet inside your .md file where you want to embed your video:
+Use `Streamable` as `SiteName` and the ID in the URL as the `VideoID` (for example, [streamable.com/s9ijg](https://streamable.com/s9ijg) would be `s9ijg`). You can also use [Streamable's free online tool](https://streamable.com/embed-video).
 
-```liquid
-{% include googleDrivePlayer.html id=page.driveId %}
-```
+### Twitch
 
-On the top of your .md file, put the Google Drive video ID. You could also put the ID of the video directly.
+Use `Twitch` as `SiteName` and the long string which appears in the URL as the `VideoID`. For example, [clips.twitch.tv/StylishChillyTubersDancingBaby](https://clips.twitch.tv/StylishChillyTubersDancingBaby) would be `StylishChillyTubersDancingBaby`.
 
-```yaml
----
-driveId: putYourIDHere
----
-```
+For security purposes Twitch also asks for the URL on which the website is being embedded, but provided you’ve defined `site.url` as standard in your `_config.yml` then the template will [handle that](video-embed.html#L61-L70). See the [embedding Twitch clips documentation](https://dev.twitch.tv/docs/embed/video-and-clips/#non-interactive-iframes-for-clips) for more details.
 
-## Additional support
+### Vidio
 
-### Embed 20Detik
+Use `Vidio` as `SiteName` and the number in the URL as the `VideoID`. For example, [vidio.com/watch/1671743-love-nature-channel-channel-trailer](https://vidio.com/watch/1671743-love-nature-channel-channel-trailer) would be `1671743`.
 
-Create a file in your `_includes` folder called `20detikPlayer.html` with this code inside:
+### Vimeo
 
-```html
-<div class="embed-container">
-  <iframe
-      src="https://20.detik.com/embed/{{ include.id }}"
-      width="700"
-      height="480"
-      frameborder="0"
-      scrolling="no"
-      allowfullscreen="true">
-  </iframe>
-</div>
-```
+Use `Vimeo` as `SiteName` and the number in the URL as the `VideoID` (for example, [vimeo.com/22439234](https://vimeo.com/22439234) would be `22439234`). Take a look at [accessing and editing embed codes](https://vimeo.zendesk.com/hc/articles/360000710167-Accessing-and-editing-embed-codes) if you're having trouble with your video's embed code ID.
 
-Place this snippet inside your .md file where you want to embed your video:
+### YouTube
 
-```liquid
-{% include 20detikPlayer.html id=page.detikId %}
-```
-
-On the top of your .md file, put the Detik video ID. You could also put the ID of the video directly.
-
-```yaml
----
-detikId: 190130051
----
-```
-
-### Embed Dailymotion
-
-Create a file in your `_includes` folder called `dailymotionPlayer.html` with this code inside:
-
-```html
-<div class="embed-container">
-  <iframe
-      src="https://www.dailymotion.com/embed/video/{{ include.id }}"
-      width="700"
-      height="480"
-      frameborder="0"
-      allowfullscreen=""
-      allow="autoplay">
-  </iframe>
-</div>
-```
-
-Place this snippet inside your .md file where you want to embed your video:
-
-```liquid
-{% include dailymotionPlayer.html id=page.dailymotionId %}
-```
-
-On the top of your .md file, put the Dailymotion video ID. You could also put the ID of the video directly.
-
-```yaml
----
-dailymotionId: x2btuie
----
-```
-
-### Embed Vidio
-
-Create a file in your `_includes` folder called `vidioPlayer.html` with this code inside:
-
-```html
-<div class="embed-container">
-  <iframe
-      src="https://www.vidio.com/embed/{{ include.id }}"
-      width="700"
-      height="480"
-      scrolling="no"
-      frameborder="0"
-      allowfullscreen="">
-  </iframe>
-</div>
-```
-
-Place this snippet inside your .md file where you want to embed your video:
-
-```liquid
-{% include vidioPlayer.html id=page.vidioId %}
-```
-
-On the top of your .md file, put the Vidio video ID. You could also put the ID of the video directly.
-
-```yaml
----
-vidioId: 1671743
----
-```
+Use `YouTube` as `SiteName` and `v` value in the URL as the `VideoID` (for example, [youtube.com/watch?v=T1itpPvFWHI](https://youtube.com/watch?v=T1itpPvFWHI) would be `T1itpPvFWHI`).
 
 ## Responsive Videos
 
 The template includes [this CSS](video-embed.html#L41-L58) to make the videos fully responsive, automatically resizing with changing window sizes. If you'd prefer not to have this or want it included in another stylesheet then simply remove the contents of `<style> ... </style>` from the template.
 
-## Iframe Attributes
+## Setting Variables
 
-These attributes are defined in the [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). You can set various additional attributes no matter what provider you use.
+The template includes several default variables, any number of which can be changed to suite your needs. This can be done globally by modifying the template or on a per-usage basis by passing as a parameter to the template.
 
-Name              | Type    | Description
-:---------------- | :------ | :----------
-`allowfullscreen` | boolean | If `true`, the player can go full screen.
-`height`          | integer | Height of the embedded window, in pixels.
-`width`           | integer | Width of the embedded window, in pixels.
-`scrolling`       | boolean | Indicates when the browser should provide a scroll bar (or other scrolling device) for the frame. Recommended: `no`.
-`src`             | string  | The video/clip source URL link.
-`autoplay`        | boolean | If `true`, the video starts playing automatically, without the user clicking play. The exception is mobile devices, on which video cannot be played without user interaction. Default: `true`.
-`muted`           | boolean | Specifies whether the initial state of the video is muted. Default: `false`.
-`time`            | 1h2m3s  | Time in the video where playback starts. Specifies hours, minutes, and seconds. Default: 0h0m0s (the start of the video).
+Name         | Type    | Default | Description
+:----------- | :------ | :------ | :----------
+`autoplay`   | boolean | `false` | Determines if the video starts playing without the user clicking play. The exception is mobile devices, on which video cannot be played without user interaction.
+`fullscreen` | boolean | `true`  | Determines if the player can go fullscreen.
+`width`      | integer | `500px` | Width of the embedded window, in pixels.
+`height`     | integer | `281px` | Height of the embedded window, in pixels.
 
-## Full example
+There are three additional [`<iframe>` attributes](https://developer.mozilla.org/docs/Web/HTML/Element/iframe) which aren't (yet) exposed in this template but could be changed globally by modifying the template.
 
-```markdown
----
-title: "Full Example"
-youtubeId: putYourIDHere
-vimeoId: putYourIDHere
-twitchId: putYourIDHere
-streamableId: putYourIDHere
-driveId: putYourIDHere
-detikId: putYourIDHere
-dailymotionId: putYourIDHere
-vidioId: putYourIDHere
-countryId: putYourIDHere
----
-
-## Embed Youtube
-
-<!---
-Include this next line in your .md for Youtube videos, make sure to put your video ID up there!
-
-Example:     youtubeId: lDi9uFcD7XI
--->
-
-{% include youtubePlayer.html id=page.youtubeId %}
-
-## Embed Vimeo
-
-<!---
-Include this next line in your .md file for Vimeo videos, make sure to put your video ID up there!
-
-Example:     vimeoID: 22439234
--->
-
-{% include vimeoPlayer.html id=page.vimeoId %}
-
-## Embed Twitch
-
-<!---
-Include this next line in your .md file for Twitch videos, make sure to put your video ID and domain up there!
-
-Example:     twitchId: GrotesqueArbitraryGullPupper
-             twitchDomain: www.nathan-lam.com
--->
-
-{% include twitchPlayer.html id=page.twitchId domain=page.twitchDomain %}
-
-## Embed Streamable
-
-<!---
-Include this next line in your .md file for Streamable videos, make sure to put your video ID up there!
-
-Example:     streamableId: s9ijg 
--->
-
-{% include streamablePlayer.html id=page.streamableId %}
-
-## Embed Google Drive
-
-<!---
-Include this next line in your .md file for Google Drive videos, make sure to put your video ID up there!
-
-Example:     driveId: 0B7L_dMcaZknxVTRndmdSQ0F5OFE/preview
--->
-
-{% include googleDrivePlayer.html id=page.driveId %}
-
-## Embed 20Detik
-
-<!---
-Include this next line in your .md file for 20Detik videos, make sure to put your video ID up there!
-
-Example:     detikId: 190130051
--->
-
-{% include 20detikPlayer.html id=page.detikId %}
-
-## Embed Dailymotion
-
-<!---
-Include this next line in your .md file for Dailymotion videos, make sure to put your video ID up there!
-
-Example:     dailymotionId: x2btuie
--->
-
-{% include dailymotionPlayer.html id=page.dailymotionId %}
-
-## Embed Vidio
-
-<!---
-Include this next line in your .md file for Vidio videos, make sure to put your video ID up there!
-
-Example:     vidioId: 1671743
--->
-
-{% include vidioPlayer.html id=page.vidioId %}
-```
+Name        | Type    | Default  | Description
+:---------- | :------ | :------- | :----------
+`scrolling` | boolean | `no`     | Indicates when the browser should provide a scroll bar (or other scrolling device) for the frame.
+`muted`     | boolean | `false`  | Specifies whether the initial state of the video is muted.
+`time`      | 1h2m3s  | `0h0m0s` | Time in the video where playback starts, given in hours, minutes, and seconds.
