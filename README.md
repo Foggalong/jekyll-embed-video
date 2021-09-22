@@ -16,6 +16,7 @@ Fork of [this great project](https://github.com/nathancy/jekyll-embed-video) by 
   * [Vidio](#vidio)
   * [Vimeo](#vimeo)
   * [YouTube](#youtube)
+  * [Skynet](#skynet)
 * [Responsive Videos](#responsive-videos)
 * [Setting Variables](#setting-variables)
 
@@ -84,6 +85,38 @@ Use `Vimeo` as `SiteName` and the number in the URL as the `VideoID` (for exampl
 ### YouTube
 
 Use `YouTube` as `SiteName` and `v` value in the URL as the `VideoID` (for example, [youtube.com/watch?v=T1itpPvFWHI](https://youtube.com/watch?v=T1itpPvFWHI) would be `T1itpPvFWHI`).
+
+### Skynet 
+
+Create a file in your `_includes` folder called `skynetPlayer.html` with this code inside: 
+
+```
+{% if page.skynetId %}
+  <div class="embed-container">
+    <iframe
+        src="https://siasky.net/{{ include.id }}"
+        width="700"
+        height="480"
+        frameborder="0"
+        allowfullscreen="">
+    </iframe>
+  </div>
+{% endif %}
+```
+
+Place this snippet inside your .md file where you want to embed your video:
+
+```
+{% include skynetPlayer.html id=page.skynetId %}
+```
+
+On the top of your .md file, put the Skynet ID.
+
+```
+---
+skynetId: nil 
+---
+```
 
 ## Responsive Videos
 
